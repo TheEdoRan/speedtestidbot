@@ -25,13 +25,16 @@ bot.on("inline_query", async (ctx) => {
     // Process first 10 results.
     servers = servers
       .slice(0, 10)
-      .map(({ name, country, sponsor, id, host }) => ({
+      .map(({ name, country, sponsor, id, url }) => ({
         type: "article",
         id,
         title: sponsor,
         description: `${name}, ${country}`,
         input_message_content: {
-          message_text: `${sponsor} - ${name}, ${country}\n\nID: ${id}\nHOST: ${host}`,
+          message_text: `${sponsor} - ${name}, ${country}\n\nID: ${id}\nURL: ${url.replace(
+            "/speedtest/upload.php",
+            "",
+          )}`,
         },
         ...Markup.inlineKeyboard([
           Markup.button.url(
