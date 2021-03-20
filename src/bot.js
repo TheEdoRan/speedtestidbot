@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Telegraf } from "telegraf";
+import { Telegraf, Markup } from "telegraf";
 import escape from "html-escape";
 import { memoSearchByName } from "./api.js";
 
@@ -23,15 +23,23 @@ bot.on("inline_query", async (ctx) => {
     let { data: servers } = await memoSearchByName(ctx.inlineQuery.query);
 
     // Process first 10 results.
-    servers = servers.slice(0, 10).map(({ name, country, sponsor, id }) => ({
-      type: "article",
-      id,
-      title: sponsor,
-      description: `${name}, ${country}`,
-      input_message_content: {
-        message_text: `${id}\n\n${sponsor} - ${name}, ${country}`,
-      },
-    }));
+    servers = servers
+      .slice(0, 10)
+      .map(({ name, country, sponsor, id, host }) => ({
+        type: "article",
+        id,
+        title: sponsor,
+        description: `${name}, ${country}`,
+        input_message_content: {
+          message_text: `${sponsor} - ${name}, ${country}\n\nID: ${id}\nHOST: ${host}`,
+        },
+        ...Markup.inlineKeyboard([
+          Markup.button.url(
+            "🌐  Test with this server",
+            `https://speedtest.net/server/${id}`,
+          ),
+        ]),
+      }));
 
     return await ctx.answerInlineQuery(servers);
   } catch (e) {
