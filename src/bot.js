@@ -31,10 +31,12 @@ bot.on("inline_query", async (ctx) => {
         title: sponsor,
         description: `${name}, ${country}`,
         input_message_content: {
-          message_text: `${sponsor} - ${name}, ${country}\n\nID: ${id}\nURL: ${url.replace(
+          message_text: `<b>${sponsor}</b> - <i>${name}, ${country}</i>\n\nID: <b>${id}</b>\nURL: ${url.replace(
             "/speedtest/upload.php",
             "",
           )}`,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
         },
         ...Markup.inlineKeyboard([
           Markup.button.url(
