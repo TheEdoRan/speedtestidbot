@@ -23,28 +23,26 @@ bot.on("inline_query", async (ctx) => {
     let { data: servers } = await searchByName(ctx.inlineQuery.query);
 
     // Process first 10 results.
-    servers = servers
-      .slice(0, 10)
-      .map(({ name, country, sponsor, id, url }) => ({
-        type: "article",
-        id,
-        title: sponsor,
-        description: `${name}, ${country}`,
-        input_message_content: {
-          message_text: `<b>${sponsor}</b> - <i>${name}, ${country}</i>\n\nID: <b>${id}</b>\nURL: ${url.replace(
-            "/speedtest/upload.php",
-            "",
-          )}`,
-          parse_mode: "HTML",
-          disable_web_page_preview: true,
-        },
-        ...Markup.inlineKeyboard([
-          Markup.button.url(
-            "🌐  Test with this server",
-            `https://speedtest.net/server/${id}`,
-          ),
-        ]),
-      }));
+    servers = servers.map(({ name, country, sponsor, id, url }) => ({
+      type: "article",
+      id,
+      title: sponsor,
+      description: `${name}, ${country}`,
+      input_message_content: {
+        message_text: `<b>${sponsor}</b> - <i>${name}, ${country}</i>\n\nID: <b>${id}</b>\nURL: ${url.replace(
+          "/speedtest/upload.php",
+          "",
+        )}`,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      },
+      ...Markup.inlineKeyboard([
+        Markup.button.url(
+          "🌐  Test with this server",
+          `https://speedtest.net/server/${id}`,
+        ),
+      ]),
+    }));
 
     // Cache for 6 hours.
     return await ctx.answerInlineQuery(servers, { cache_time: 21600 });
