@@ -1,10 +1,4 @@
 import axios from "axios";
-import memoize from "memoizee";
 
-const searchByName = (query) =>
+export const searchByName = (query) =>
   axios.get(`https://www.speedtest.net/api/js/servers?search=${query}`);
-
-// Memoize for 1 hour.
-const memoOpts = { promise: true, maxAge: 3600 * 1000 };
-
-export const memoSearchByName = memoize(searchByName, memoOpts);

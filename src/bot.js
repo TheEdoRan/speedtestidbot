@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { Telegraf, Markup } from "telegraf";
 import escape from "html-escape";
-import { memoSearchByName } from "./api.js";
+import { searchByName } from "./api.js";
 
 dotenv.config();
 
@@ -20,7 +20,7 @@ bot.start((ctx) =>
 
 bot.on("inline_query", async (ctx) => {
   try {
-    let { data: servers } = await memoSearchByName(ctx.inlineQuery.query);
+    let { data: servers } = await searchByName(ctx.inlineQuery.query);
 
     // Process first 10 results.
     servers = servers
@@ -46,7 +46,8 @@ bot.on("inline_query", async (ctx) => {
         ]),
       }));
 
-    return await ctx.answerInlineQuery(servers);
+    // Cache for 6 hours.
+    return await ctx.answerInlineQuery(servers, { cache_time: 21600 });
   } catch (e) {
     console.error(e.message);
   }
