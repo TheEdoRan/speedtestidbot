@@ -30,7 +30,7 @@ bot.on("inline_query", async (ctx) => {
       description: `${name}, ${country}`,
       input_message_content: {
         message_text: `<b>${sponsor}</b> - <i>${name}, ${country}</i>\n\nID: <b>${id}</b>\nURL: ${url.replace(
-          "/speedtest/upload.php",
+          ":8080/speedtest/upload.php",
           "",
         )}`,
         parse_mode: "HTML",
@@ -38,7 +38,7 @@ bot.on("inline_query", async (ctx) => {
       },
       ...Markup.inlineKeyboard([
         Markup.button.url(
-          "🌐  Test with this server",
+          "👉 Test with this server 👈",
           `https://speedtest.net/server/${id}`,
         ),
       ]),
