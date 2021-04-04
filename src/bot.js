@@ -38,7 +38,7 @@ bot.on("inline_query", async (ctx) => {
       },
       ...Markup.inlineKeyboard([
         Markup.button.url(
-          "👉 Test with this server 👈",
+          "👉  Test with this server  👈",
           `https://speedtest.net/server/${id}`,
         ),
       ]),
