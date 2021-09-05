@@ -3,11 +3,17 @@ import { Telegraf, Markup } from "telegraf";
 import type { InlineQueryResultArticle } from "typegram";
 import escape from "escape-html";
 
+import { logger } from "./telegram/logger";
 import { searchByName } from "./api";
 import type { SpeedtestServer } from "./api/types";
 
 const bot = new Telegraf(process.env.BOT_TOKEN as string);
 
+// Only for debugging purposes.
+if (process.env.DEBUG) {
+  // Logging middleware.
+  bot.use(logger());
+}
 // /start command.
 bot.start((ctx) =>
   ctx
