@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  itabulbot:
+    container_name: speedtestidbot
+    image: theedoran/speedtestidbot:latest
+    env_file: .env
+    init: true
+    restart: unless-stopped
