@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_push:
-    name: "Build image and push on Docker Hub"
+    name: Build image and push on Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out ${{ github.ref }}
