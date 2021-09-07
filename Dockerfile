@@ -7,7 +7,7 @@ COPY tsconfig.json ./
 COPY src src
 RUN npm run build
 
-# Launch stage
+# Launch
 FROM node:14-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
