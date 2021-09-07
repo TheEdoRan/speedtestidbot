@@ -8,9 +8,11 @@ COPY src src
 RUN npm run build
 
 # Launch stage
-FROM node:14-alpine AS launcher
+FROM node:14-alpine
 ENV NODE_ENV=production
 WORKDIR /usr/src/app
+RUN chown node:node .
+USER node
 COPY package*.json ./
 RUN npm ci
 COPY --from=builder /usr/src/app/dist/ .
