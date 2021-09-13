@@ -14,6 +14,7 @@ if (process.env.DEBUG) {
   // Logging middleware.
   bot.use(logger());
 }
+
 // /start command.
 bot.start((ctx) =>
   ctx
