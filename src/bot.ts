@@ -1,11 +1,11 @@
 import "dotenv/config";
-import { Telegraf, Markup } from "telegraf";
-import type { InlineQueryResultArticle } from "typegram";
 import escape from "escape-html";
-
-import { logger } from "./telegram/logger";
+import http from "http";
+import { Markup, Telegraf } from "telegraf";
+import type { InlineQueryResultArticle } from "typegram";
 import { searchByName } from "./api";
 import type { SpeedtestServer } from "./api/types";
+import { logger } from "./telegram/logger";
 
 const bot = new Telegraf(process.env.BOT_TOKEN as string);
 
@@ -72,3 +72,11 @@ bot.launch();
 // Enable graceful stop.
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+// Healthcheck for fly.
+http
+  .createServer((req, res) => {
+    res.writeHead(200);
+    res.end("ok");
+  })
+  .listen(8080);
