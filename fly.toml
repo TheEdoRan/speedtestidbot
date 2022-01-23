@@ -12,6 +12,9 @@ processes = []
   allowed_public_ports = []
   auto_rollback = true
 
+[deploy]
+  strategy = "immediate"
+
 [[services]]
   http_checks = []
   internal_port = 8080
@@ -19,13 +22,21 @@ processes = []
   protocol = "tcp"
   script_checks = []
 
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
     type = "connections"
 
   [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
+    grace_period = "10s"
+    interval = "30s"
     restart_limit = 0
-    timeout = "2s"
+    timeout = "5s"

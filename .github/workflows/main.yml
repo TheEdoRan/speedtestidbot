@@ -17,11 +17,3 @@ jobs:
         uses: superfly/flyctl-actions@1.1
         with:
           args: "deploy --detach"
-      - name: Suspend
-        uses: superfly/flyctl-actions@1.1
-        with:
-          args: "suspend speedtestidbot"
-      - name: Resume
-        uses: superfly/flyctl-actions@1.1
-        with:
-          args: "resume speedtestidbot"
