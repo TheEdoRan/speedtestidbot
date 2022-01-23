@@ -1,5 +1,6 @@
 import "dotenv/config";
 import escape from "escape-html";
+import { createServer } from "http";
 import { Markup, Telegraf } from "telegraf";
 import type { InlineQueryResultArticle } from "typegram";
 import { searchByName } from "./api";
@@ -65,18 +66,14 @@ bot.on("inline_query", async (ctx) => {
   }
 });
 
-// Launch bot.
-if (process.env.NODE_ENV === "production") {
-  bot.launch({
-    webhook: {
-      domain: process.env.WEBHOOK_URL as string,
-      port: 8080,
-    },
-  });
-} else {
-  bot.launch();
-}
+bot.launch();
 
 // Enable graceful stop.
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+// fly healthcheck.
+createServer((_, res) => {
+  res.writeHead(200);
+  res.end("ok");
+}).listen(8080);
