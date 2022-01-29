@@ -68,12 +68,20 @@ bot.on("inline_query", async (ctx) => {
 
 bot.launch();
 
-// Enable graceful stop.
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));
-
 // fly healthcheck.
-createServer((_, res) => {
+const server = createServer((_, res) => {
   res.writeHead(200);
   res.end("ok");
-}).listen(8080);
+});
+
+server.listen(8080);
+
+// Enable graceful stop.
+process.once("SIGINT", () => {
+  bot.stop("SIGINT");
+  server.close();
+});
+process.once("SIGTERM", () => {
+  bot.stop("SIGTERM");
+  server.close();
+});
