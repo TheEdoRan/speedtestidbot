@@ -1,4 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
 node_modules
+yarn.lock
 dist
-npm-debug.log
-.env
+.env*
+.npmrc
+
+# ESLint
+.eslintcache
+
+# TypeScript stuff
+tsconfig.tsbuildinfo
