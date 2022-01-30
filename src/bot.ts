@@ -10,8 +10,7 @@ import { logger } from "./telegram/logger";
 const bot = new Telegraf(process.env.BOT_TOKEN as string);
 
 // Only for debugging purposes.
-if (process.env.DEBUG) {
-  // Logging middleware.
+if (process.env.DEBUG === "true") {
   bot.use(logger());
 }
 
