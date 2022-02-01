@@ -4,6 +4,7 @@
 .LSOverride
 
 node_modules
+.vscode
 yarn.lock
 dist
 .env*
