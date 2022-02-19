@@ -40,7 +40,7 @@ func HandleInlineQuery(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	inlineConf := tgbotapi.InlineConfig{
 		InlineQueryID: inline.ID,
 		IsPersonal:    false,
-		CacheTime:     1,
+		CacheTime:     60 * 60 * 4, // cache for 4 hours
 		Results:       articles,
 	}
 
