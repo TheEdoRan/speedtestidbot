@@ -58,5 +58,6 @@ docker-compose.yml
 
 # Git
 .git
+.github
 LICENSE
 README.md
