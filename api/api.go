@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -24,12 +23,12 @@ type ServerResponse struct {
 	Host            string `json:"host"`
 }
 
-const baseUrl = "https://www.speedtest.net/api/js/servers?engine=js&https_functional=true&limit=10&search=%s"
+const baseUrl = "https://www.speedtest.net/api/js/servers?engine=js&https_functional=true&limit=10&search="
 
 // SearchByName uses Speedtest API to retrieve a list of servers relative to
 // the query, for a maximum of 10 elements.
 func SearchByName(query string) ([]ServerResponse, error) {
-	url := fmt.Sprintf(baseUrl, url.QueryEscape(query))
+	url := baseUrl + url.QueryEscape(query)
 	resp, err := http.Get(url)
 
 	if err != nil {

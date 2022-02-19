@@ -25,11 +25,11 @@ func HandleInlineQuery(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 		url := strings.Replace(s.URL, ":8080/speedtest/upload.php", "", 1)
 		txt := fmt.Sprintf(InlineResponseText, s.Sponsor, s.Name, s.Country, s.ID, url)
 		art := tgbotapi.NewInlineQueryResultArticleHTML(s.ID, s.Sponsor, txt)
-		art.Description = fmt.Sprintf("%s, %s", s.Name, s.Country)
+		art.Description = s.Name + ", " + s.Country
 
 		kb := tgbotapi.NewInlineKeyboardMarkup(
 			tgbotapi.NewInlineKeyboardRow(
-				tgbotapi.NewInlineKeyboardButtonURL("🌐  Test with this server", fmt.Sprintf("https://speedtest.net/server/%s", s.ID)),
+				tgbotapi.NewInlineKeyboardButtonURL("🌐  Test with this server", "https://speedtest.net/server/"+s.ID),
 			),
 		)
 		art.ReplyMarkup = &kb
