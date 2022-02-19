@@ -54,7 +54,6 @@ tmp
 .env
 
 # Docker
-Dockerfile*
 docker-compose.yml
 
 # Git
