@@ -2,6 +2,7 @@ package bot
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -38,10 +39,18 @@ func HandleInlineQuery(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 		articles = append(articles, art)
 	}
 
+	// Cache for 4 hours (in production)
+	var cacheTime = 60 * 60 * 4
+
+	// Disable cache in development
+	if os.Getenv("DEV") == "true" {
+		cacheTime = 0
+	}
+
 	inlineConf := tgbotapi.InlineConfig{
 		InlineQueryID: inline.ID,
 		IsPersonal:    false,
-		CacheTime:     60 * 60 * 4, // cache for 4 hours
+		CacheTime:     cacheTime,
 		Results:       articles,
 	}
 
