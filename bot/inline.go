@@ -2,7 +2,7 @@ package bot
 
 import (
 	"fmt"
-	"strings"
+	"regexp"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/theedoran/speedtestidbot/api"
@@ -22,14 +22,15 @@ func HandleInlineQuery(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	var articles []interface{}
 
 	for _, s := range servers {
-		url := strings.Replace(s.URL, ":8080/speedtest/upload.php", "", 1)
-		txt := fmt.Sprintf(InlineResponseText, s.Sponsor, s.Name, s.Country, s.ID, url)
+		match := regexp.MustCompile("https?://(.+):8080/speedtest/upload.php")
+		trace := match.ReplaceAllString(s.URL, "$1")
+		txt := fmt.Sprintf(InlineResponseText, s.Sponsor, s.Name, s.Country, s.ID, trace)
 		art := tgbotapi.NewInlineQueryResultArticleHTML(s.ID, s.Sponsor, txt)
 		art.Description = s.Name + ", " + s.Country
 
 		kb := tgbotapi.NewInlineKeyboardMarkup(
 			tgbotapi.NewInlineKeyboardRow(
-				tgbotapi.NewInlineKeyboardButtonURL("🌐  Test with this server", "https://speedtest.net/server/"+s.ID),
+				tgbotapi.NewInlineKeyboardButtonURL("🔗  Test with this server", "https://speedtest.net/server/"+s.ID),
 			),
 		)
 		art.ReplyMarkup = &kb

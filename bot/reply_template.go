@@ -17,5 +17,5 @@ const StartCommandReply = "Hi <b>%s</b>! 👋\n" +
 // 2: Server name
 // 3: Server country
 // 4: Server ID
-// 5: Server URL (without port)
-const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <b>%s</b>\nURL: %v"
+// 5: Server trace
+const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <b>%s</b>\nTrace: %v"
