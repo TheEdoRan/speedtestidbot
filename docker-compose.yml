@@ -3,8 +3,10 @@ version: "3.9"
 services:
   speedtestidbot:
     container_name: speedtestidbot
-    build: .
     image: speedtestidbot
+    build: .
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     init: true
     env_file: .env
     restart: unless-stopped
