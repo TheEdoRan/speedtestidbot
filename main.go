@@ -9,7 +9,6 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/theedoran/speedtestidbot/bot"
-	"github.com/theedoran/speedtestidbot/fly"
 )
 
 func main() {
@@ -24,9 +23,6 @@ func main() {
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
-
-	go fly.HealthCheck()
-	fmt.Println("healthcheck server started")
 
 	bot.Start(done)
 	fmt.Println("bot gracefully stopped")

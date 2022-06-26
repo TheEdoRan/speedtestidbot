@@ -4,8 +4,6 @@ services:
   speedtestidbot:
     container_name: speedtestidbot
     build: .
-    ports:
-      - "8080:8080"
     image: speedtestidbot
     init: true
     env_file: .env
