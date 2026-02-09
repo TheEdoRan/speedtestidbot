@@ -18,4 +18,4 @@ const StartCommandReply = "Hi <b>%s</b>! 👋\n" +
 // 3: Server country
 // 4: Server ID
 // 5: Server trace
-const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <b>%s</b>\nTrace: %v"
+const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <code>%s</code>\nTrace: %v"
