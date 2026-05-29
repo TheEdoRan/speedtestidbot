@@ -1,6 +1,6 @@
 module github.com/theedoran/speedtestidbot
 
-go 1.18
+go 1.26
 
 require github.com/joho/godotenv v1.4.0
 
