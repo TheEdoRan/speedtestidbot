@@ -8,7 +8,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /speedtestidbot
 
 # Run
-FROM gcr.io/distroless/static-debian12 as runner
+FROM gcr.io/distroless/static-debian12 AS runner
 WORKDIR /app
 COPY --from=builder /speedtestidbot /speedtestidbot
 USER nonroot:nonroot
