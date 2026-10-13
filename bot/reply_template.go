@@ -8,7 +8,7 @@ const StartCommandReply = "Hi <b>%s</b>! 👋\n" +
 	"Example:\n" +
 	"<pre>@speedtestidbot Vodafone</pre>\n\n" +
 	"Then, you just have to select an item from the list, and you'll get ID and other useful data back.\n\n" +
-	"This bot is licensed under <a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU GPLv3</a>.\n" +
+	"This bot is licensed under the <a href=\"https://github.com/theedoran/speedtestidbot/blob/main/LICENSE\">MIT License</a>.\n" +
 	"Source code can be found <a href=\"https://github.com/theedoran/speedtestidbot\">here</a>."
 
 // InlineResponseText is the template for inline queries replies (chosen server).
