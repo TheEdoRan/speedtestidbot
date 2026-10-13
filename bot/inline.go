@@ -25,7 +25,7 @@ func HandleInlineQuery(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	for _, s := range servers {
 		match := regexp.MustCompile("https?://(.+):8080/speedtest/upload.php")
 		trace := match.ReplaceAllString(s.URL, "$1")
-		txt := fmt.Sprintf(InlineResponseText, s.Sponsor, s.Name, s.Country, s.ID, trace)
+		txt := fmt.Sprintf(InlineResponseText, s.Sponsor, s.Name, s.Country, s.ID, trace, s.ID)
 		art := tgbotapi.NewInlineQueryResultArticleHTML(s.ID, s.Sponsor, txt)
 		art.Description = s.Name + ", " + s.Country
 

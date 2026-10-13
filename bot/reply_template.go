@@ -18,4 +18,5 @@ const StartCommandReply = "Hi <b>%s</b>! 👋\n" +
 // 3: Server country
 // 4: Server ID
 // 5: Server trace
-const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <code>%s</code>\nTrace: %v"
+// 6: Server ID (for the speedtest CLI command)
+const InlineResponseText = "<b>%s</b> - <i>%s, %s</i>\n\nID: <code>%s</code>\nTrace: %v\nTest: <code>speedtest -s %s</code>"
